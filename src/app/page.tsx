@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Site from "./Site";
 import Link from "next/link";
 import { useState } from "react";

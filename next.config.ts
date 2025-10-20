@@ -1,15 +1,11 @@
+// next.config.ts
+const isProd = process.env.NODE_ENV === 'production'
+const repo = 'EvenNewerPersonalWebsite' // <-- YOUR REPO NAME
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  output: 'export', // 👈 Required for static export
-  basePath: '/EvenNewerPersonalWebsite',
-  assetPrefix: '/EvenNewerPersonalWebsite',
-  images: {
-    unoptimized: true,
-  },
-  trailingSlash: true,
-};
-
-module.exports = nextConfig;
-
-export default nextConfig
+export default {
+  output: 'export',
+  basePath: isProd ? `/${repo}` : '',
+  assetPrefix: isProd ? `/${repo}/` : '',
+  images: { unoptimized: true },
+  trailingSlash: true, // helps with GH Pages + static export
+}

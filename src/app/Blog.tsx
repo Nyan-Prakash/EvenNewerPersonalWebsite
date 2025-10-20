@@ -83,7 +83,12 @@ export default function Blog() {
           <select
             id="sort"
             value={sort}
-            onChange={(e) => setSort(e.target.value as any)}
+            onChange={(e) => {
+              const value = e.target.value;
+              if (value === "new" || value === "old") {
+                setSort(value);
+              }
+            }}
             className="rounded-lg border px-3 py-2 shadow-sm"
           >
             <option value="new">Newest</option>

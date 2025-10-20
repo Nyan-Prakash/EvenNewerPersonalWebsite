@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 /**
  * Single-file Next.js portfolio page pre-filled from the user's resume.
@@ -283,15 +284,17 @@ export default function Site() {
             ))}
           </div>
         </div>
-          <div className="flex aspect-square items-center justify-center p-0 overflow-hidden border border-blue-200 rounded-2xl">
-            <img
-              src="./me.jpg"
-              alt="Profile"
-              className="w-full h-full object-cover m-0 rounded-2xl"
-              style={{ margin: 0 }}
-            />
-          </div>
-            </section>
+        <div className="relative flex aspect-square items-center justify-center overflow-hidden rounded-2xl border border-blue-200 p-0">
+          <Image
+            src="/me.jpg"
+            alt="Profile"
+            fill
+            className="rounded-2xl object-cover"
+            priority
+            sizes="(max-width: 640px) 240px, 320px"
+          />
+        </div>
+      </section>
 
       {/* About */}
       <section id="about" className="space-y-4 py-8">
