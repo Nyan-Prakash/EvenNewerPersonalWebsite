@@ -5,15 +5,18 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
+    "postbuild": "node -e \"require('fs').mkdirSync('out', { recursive: true }); require('fs').writeFileSync('out/.nojekyll', '')\"",
     "start": "next start",
-    "deploy": "gh-pages -d out",
+    "deploy": "gh-pages -d out --dotfiles",
     "lint": "eslint"
   },
   "dependencies": {
+    "gray-matter": "^4.0.3",
     "gsap": "^3.13.0",
     "next": "15.5.4",
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "react-markdown": "^9.0.3"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
