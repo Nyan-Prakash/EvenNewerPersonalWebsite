@@ -1,7 +1,9 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
+import React, { useEffect, useState } from "react";
+
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 /**
  * Single-file Next.js portfolio page pre-filled from the user's resume.
@@ -286,7 +288,7 @@ export default function Site() {
         </div>
         <div className="relative flex aspect-square items-center justify-center overflow-hidden rounded-2xl border border-blue-200 p-0">
           <Image
-            src="/me.jpg"
+            src={`${basePath}/me.jpg`}
             alt="Profile"
             fill
             className="rounded-2xl object-cover"
@@ -383,28 +385,7 @@ export default function Site() {
         </div>
       </section>
 
-      {/* Writing */}
-      <section id="writing" className="py-8">
-        <SectionHeading id="writing">Writing</SectionHeading>
-        <div className="mt-4 divide-y rounded-2xl border">
-          {DATA.writing.map((w) => (
-            <article key={w.title} className="flex items-center justify-between gap-4 p-4">
-              <div>
-                <h3 className="text-base font-semibold">
-                  <Link href={w.href} className="underline-offset-4 hover:underline">
-                    {w.title}
-                  </Link>
-                </h3>
-                <p className="text-sm opacity-70">{w.date}</p>
-              </div>
-              <Link href={w.href} className="rounded-lg border px-3 py-1 text-xs font-semibold hover:shadow">
-                Read
-              </Link>
-            </article>
-          ))}
-        </div>
-      </section>
-
+  
       {/* Contact */}
       <section id="contact" className="py-8">
         <SectionHeading id="contact">Contact</SectionHeading>
