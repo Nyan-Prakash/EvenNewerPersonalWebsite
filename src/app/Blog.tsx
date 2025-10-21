@@ -1,28 +1,13 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import type { BlogPostSummary } from "@/types/blog";
 import Link from "next/link";
+import { useMemo, useState } from "react";
 
-// Types
-export type BlogPost = {
-  id: number;
-  title: string;
-  date: string; // ISO string: YYYY-MM-DD
-  content: string; // plain text or short HTML
+type BlogProps = {
+  posts: BlogPostSummary[];
 };
 
-// Demo data — replace with your real data source
-const posts: BlogPost[] = [
-  {
-    id: 1,
-    title: "Welcome to My Blog",
-    date: "2024-06-10",
-    content:
-      "This is the first post on my personal blog. Stay tuned for more updates!",
-  }
-];
-
-// Utilities
 const formatDate = (iso: string) =>
   new Date(iso).toLocaleDateString(undefined, {
     year: "numeric",
@@ -30,145 +15,181 @@ const formatDate = (iso: string) =>
     day: "numeric",
   });
 
-function classNames(...classes: Array<string | false | null | undefined>) {
-  return classes.filter(Boolean).join(" ");
-}
-
-// Component
-export default function Blog() {
+export default function Blog({ posts }: BlogProps) {
   const [query, setQuery] = useState("");
-  const [expanded, setExpanded] = useState<Record<number, boolean>>({});
   const [sort, setSort] = useState<"new" | "old">("new");
+  const [tag, setTag] = useState<string>("All");
+
+  const uniqueTags = useMemo(
+    () => Array.from(new Set(posts.flatMap((post) => post.tags))).sort(),
+    [posts]
+  );
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
-    const arr = posts.filter((p) =>
-      [p.title, p.content].some((s) => s.toLowerCase().includes(q))
-    );
+    const matchesQuery = (post: BlogPostSummary) =>
+      [post.title, post.subtitle, post.summary]
+        .filter(Boolean)
+        .some((field) => field.toLowerCase().includes(q));
+
+    const matchesTag = (post: BlogPostSummary) =>
+      tag === "All" ? true : post.tags.includes(tag);
+
+    const arr = posts.filter((post) => matchesQuery(post) && matchesTag(post));
+
     return arr.sort((a, b) =>
       sort === "new"
         ? +new Date(b.date) - +new Date(a.date)
         : +new Date(a.date) - +new Date(b.date)
     );
-  }, [query, sort]);
+  }, [posts, query, sort, tag]);
 
   return (
-    <main className="mx-auto max-w-3xl px-4 py-12">
-      {/* Header */}
-      <div className="sticky top-0 z-10 -mx-4 mb-6 bg-gradient-to-b from-white/80 to-transparent px-4 py-4 backdrop-blur dark:from-neutral-950/80">
-        <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl">Blog</h1>
-        <p className="mt-1 max-w-prose text-sm opacity-70">
-          Thoughts on building, learning, and shipping.
+    <main className="mx-auto max-w-6xl px-5 pb-16 pt-14 lg:pb-20">
+      <div className="flex flex-col items-center gap-5 text-center">
+        <div className="inline-flex items-center gap-2 rounded-full border px-4 py-1 text-xs font-semibold tracking-widest uppercase opacity-70">
+          <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+          Fresh Notes & Essays
+        </div>
+        <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
+          Build Logs, Experiments & Essays
+        </h1>
+        <p className="max-w-2xl text-sm opacity-70 sm:text-base">
+          A living archive of what I&apos;m shipping, learning, and unlearning across AI,
+          full-stack product, and robotics. Filter by topic, skim the highlights, or dive
+          into the long-form breakdowns.
         </p>
       </div>
 
-      {/* Toolbar */}
-      <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div className="group relative w-full sm:w-80">
-          <input
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search posts…"
-            className="w-full rounded-xl border px-4 py-2.5 pr-9 shadow-sm outline-none transition focus:ring-2 focus:ring-black/10 dark:focus:ring-white/10"
-          />
-          <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-sm opacity-50">
-            ⌘K
+      {/* Controls */}
+      <section className="mt-10 grid gap-4 lg:grid-cols-[1.8fr,1fr]">
+        <div className="flex flex-col gap-3 rounded-2xl border border-neutral-200/60 bg-white/60 px-4 py-4 backdrop-blur dark:border-neutral-800 dark:bg-neutral-950/50 sm:flex-row sm:items-center sm:px-6">
+          <div className="group relative flex-1">
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search posts by title, idea, or keyword…"
+              className="w-full rounded-xl border border-neutral-200 bg-white/70 px-4 py-2.5 pr-12 text-sm shadow-sm outline-none transition focus:ring-2 focus:ring-blue-400/60 dark:border-neutral-800 dark:bg-neutral-900/70 dark:focus:ring-blue-400/40"
+            />
+            <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-xs uppercase tracking-wide opacity-50">
+              ⌘K
+            </span>
+          </div>
+
+          <div className="flex gap-3">
+            <select
+              value={tag}
+              onChange={(e) => setTag(e.target.value)}
+              className="flex-1 rounded-xl border border-neutral-200 bg-white/70 px-3 py-2 text-sm shadow-sm outline-none transition focus:ring-2 focus:ring-blue-400/60 dark:border-neutral-800 dark:bg-neutral-900/70 dark:focus:ring-blue-400/40 sm:w-40"
+            >
+              <option value="All">All topics</option>
+              {uniqueTags.map((t) => (
+                <option key={t} value={t}>
+                  {t}
+                </option>
+              ))}
+            </select>
+            <select
+              value={sort}
+              onChange={(e) => {
+                const value = e.target.value;
+                if (value === "new" || value === "old") {
+                  setSort(value);
+                }
+              }}
+              className="w-36 rounded-xl border border-neutral-200 bg-white/70 px-3 py-2 text-sm shadow-sm outline-none transition focus:ring-2 focus:ring-blue-400/60 dark:border-neutral-800 dark:bg-neutral-900/70 dark:focus:ring-blue-400/40"
+            >
+              <option value="new">Newest first</option>
+              <option value="old">Oldest first</option>
+            </select>
+          </div>
+        </div>{/*
+        <div className="rounded-2xl border border-neutral-200/60 bg-gradient-to-br from-neutral-100/90 via-white/90 to-white/40 px-6 py-5 text-left shadow-sm backdrop-blur dark:border-neutral-800 dark:from-neutral-900/70 dark:via-neutral-900/50 dark:to-neutral-900/40">
+          <p className="text-xs uppercase tracking-[0.25em] text-neutral-500 dark:text-neutral-400">
+            Newsletter
+          </p>
+          <h2 className="mt-2 text-lg font-semibold">Monthly ship notes</h2>
+          <p className="mt-1 text-sm opacity-70">
+            Get a distilled recap of the best experiments, wins, and prototypes.
+          </p>
+          <Link
+            href="mailto:nyanjprakash@gmail.com"
+            className="mt-4 inline-flex items-center gap-2 rounded-xl border px-4 py-2 text-xs font-semibold shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg"
+          >
+            Join the list
+            <span aria-hidden>→</span>
+          </Link>
+        </div>
+        */}
+      </section>
+
+      {/* Browse posts */}
+      <section className="mt-12">
+        <div className="flex flex-wrap items-center gap-3">
+          <h2 className="text-xl font-semibold tracking-tight">
+            Browse the archive
+          </h2>
+          <span className="text-xs uppercase tracking-[0.3em] text-neutral-500 dark:text-neutral-400">
+            {filtered.length} post{filtered.length === 1 ? "" : "s"}
           </span>
         </div>
 
-        <div className="flex items-center gap-2 text-sm">
-          <label htmlFor="sort" className="opacity-70">
-            Sort
-          </label>
-          <select
-            id="sort"
-            value={sort}
-            onChange={(e) => {
-              const value = e.target.value;
-              if (value === "new" || value === "old") {
-                setSort(value);
-              }
-            }}
-            className="rounded-lg border px-3 py-2 shadow-sm"
-          >
-            <option value="new">Newest</option>
-            <option value="old">Oldest</option>
-          </select>
-        </div>
-      </div>
-
-      {/* List */}
-      <div className="space-y-5">
-        {filtered.map((post, idx) => {
-          const isOpen = !!expanded[post.id];
-          return (
-            <article
-              key={post.id}
-              className={classNames(
-                "group relative overflow-hidden rounded-2xl border",
-                "bg-white/60 shadow-sm backdrop-blur transition hover:shadow-md dark:bg-neutral-900/60",
-                "before:absolute before:-left-16 before:-top-16 before:h-40 before:w-40 before:rounded-full before:bg-gradient-to-br before:from-black/5 before:to-transparent before:blur-2xl before:transition group-hover:before:opacity-100",
-                "dark:before:from-white/10"
-              )}
-            >
-              {/* Card body */}
-              <div className="p-5 sm:p-6">
-                <header className="mb-2 flex flex-wrap items-center justify-between gap-2">
-                  <h2 className="text-lg font-semibold sm:text-xl">
-                    <Link href={`#post-${post.id}`} className="transition hover:opacity-90">
-                      {post.title}
-                    </Link>
-                  </h2>
-                  <time
-                    dateTime={post.date}
-                    className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium opacity-80"
-                  >
-                    <span className="h-1.5 w-1.5 rounded-full bg-current opacity-70" />
-                    {formatDate(post.date)}
-                  </time>
-                </header>
-
-                {/* Excerpt / Content */}
-                <div className={classNames("prose prose-neutral max-w-none text-sm dark:prose-invert", isOpen ? "line-clamp-none" : "line-clamp-3")}
+        {filtered.length === 0 ? (
+          <div className="mt-8 rounded-2xl border border-dashed border-neutral-200/60 p-10 text-center text-sm text-neutral-500 dark:border-neutral-800 dark:text-neutral-400">
+            No posts match that search just yet. Try a different keyword or tag.
+          </div>
+        ) : (
+          <div className="mt-6 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {filtered.map((post) => (
+              <Link
+                key={post.slug}
+                href={`/blog/${post.slug}`}
+                className="group flex h-full flex-col overflow-hidden rounded-2xl border border-neutral-200/60 bg-white/80 p-0 shadow-sm transition hover:-translate-y-1 hover:shadow-xl dark:border-neutral-800 dark:bg-neutral-950/70"
+              >
+                <div
+                  className={`relative h-32 overflow-hidden bg-gradient-to-br ${post.accent}`}
                 >
-                  {post.content}
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.65),transparent_55%)] mix-blend-screen" />
                 </div>
-
-                {/* Actions */}
-                <div className="mt-4 flex items-center justify-between">
-                  <button
-                    onClick={() =>
-                      setExpanded((s) => ({ ...s, [post.id]: !s[post.id] }))
-                    }
-                    className="rounded-lg border px-3 py-1.5 text-xs font-semibold shadow-sm transition hover:shadow"
-                  >
-                    {isOpen ? "Show less" : "Read more"}
-                  </button>
-
-                  <div className="flex items-center gap-2 text-xs opacity-70">
-                    <span className="hidden sm:inline">#{idx + 1}</span>
-                    <span>~{Math.max(1, Math.round(post.content.split(" ").length / 180))} min</span>
+                <div className="flex flex-1 flex-col gap-4 p-5">
+                  <div className="flex items-center gap-3 text-xs font-medium uppercase tracking-wide text-neutral-500 dark:text-neutral-400">
+                    <time dateTime={post.date}>{formatDate(post.date)}</time>
+                    <span className="h-1 w-1 rounded-full bg-current opacity-60" />
+                    <span>{post.readingMinutes} min read</span>
+                  </div>
+                  <div className="space-y-2">
+                    <h3 className="text-lg font-semibold text-neutral-900 transition group-hover:text-neutral-600 dark:text-white">
+                      {post.title}
+                    </h3>
+                    <p className="text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">
+                      {post.subtitle || post.summary}
+                    </p>
+                  </div>
+                  <div className="mt-auto flex flex-wrap gap-2">
+                    {post.tags.map((tagName) => (
+                      <span
+                        key={tagName}
+                        className="rounded-full border border-neutral-200/60 bg-neutral-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-neutral-500 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-300"
+                      >
+                        {tagName}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="mt-4 inline-flex items-center gap-2 text-xs font-semibold text-neutral-500 transition group-hover:text-neutral-900 dark:text-neutral-400 dark:group-hover:text-neutral-100">
+                    Read post
+                    <span aria-hidden>↗</span>
                   </div>
                 </div>
-              </div>
-
-              {/* Accent bar */}
-              <div className="h-1 w-full bg-gradient-to-r from-transparent via-black/10 to-transparent dark:via-white/15" />
-            </article>
-          );
-        })}
-
-        {filtered.length === 0 && (
-          <div className="rounded-2xl border p-8 text-center text-sm opacity-70">
-            No posts found. Try a different search.
+              </Link>
+            ))}
           </div>
         )}
-      </div>
+      </section>
 
       {/* Footer */}
-      <div className="mt-10 border-t pt-6 text-center text-xs opacity-60">
-        © {new Date().getFullYear()} — Built with Next.js & Tailwind
-      </div>
+      <footer className="mt-16 rounded-3xl border border-neutral-200/60 bg-white/80 px-8 py-6 text-center text-xs uppercase tracking-[0.35em] text-neutral-500 backdrop-blur dark:border-neutral-800 dark:bg-neutral-950/70 dark:text-neutral-400">
+        © {new Date().getFullYear()} — Built in public. Subscribe for the next drop.
+      </footer>
     </main>
   );
 }
