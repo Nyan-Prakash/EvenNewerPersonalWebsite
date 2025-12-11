@@ -271,11 +271,506 @@ function Card({ children, delay = 0, playful = false }: { children: React.ReactN
   );
 }
 
+// ---------- Hand-Drawn Effects ----------
+
+// Define different hand-drawn accessories
+const HAND_DRAWN_EFFECTS = [
+  // Effect 1: Top hat and monocle
+  {
+    id: 'tophat-monocle',
+    elements: [
+      {
+        type: 'svg',
+        style: {
+          top: '-20px',
+          left: '55%',
+          transform: 'translateX(-50%)',
+          width: '140px',
+          height: '120px',
+        },
+        viewBox: '0 0 140 120',
+        paths: [
+          // Scribbled fill for crown
+          { type: 'group', className: 'hat-fill', children: [
+            { type: 'line', x1: 42, y1: 92, x2: 45, y2: 28, strokeWidth: 5 },
+            { type: 'line', x1: 46, y1: 91, x2: 49, y2: 29, strokeWidth: 5 },
+            { type: 'line', x1: 50, y1: 92, x2: 53, y2: 28, strokeWidth: 5 },
+            { type: 'line', x1: 54, y1: 91, x2: 57, y2: 29, strokeWidth: 5 },
+            { type: 'line', x1: 58, y1: 92, x2: 61, y2: 28, strokeWidth: 5 },
+            { type: 'line', x1: 62, y1: 91, x2: 65, y2: 29, strokeWidth: 5 },
+            { type: 'line', x1: 66, y1: 92, x2: 69, y2: 28, strokeWidth: 5 },
+            { type: 'line', x1: 70, y1: 91, x2: 73, y2: 29, strokeWidth: 5 },
+            { type: 'line', x1: 74, y1: 92, x2: 77, y2: 28, strokeWidth: 5 },
+            { type: 'line', x1: 78, y1: 91, x2: 81, y2: 29, strokeWidth: 5 },
+            { type: 'line', x1: 82, y1: 92, x2: 85, y2: 28, strokeWidth: 5 },
+            { type: 'line', x1: 86, y1: 91, x2: 89, y2: 29, strokeWidth: 5 },
+            { type: 'line', x1: 90, y1: 92, x2: 93, y2: 28, strokeWidth: 5 },
+            { type: 'line', x1: 94, y1: 91, x2: 97, y2: 29, strokeWidth: 5 },
+          ]},
+          // Brim
+          { type: 'path', className: 'hat-outline', d: 'M 10,95 Q 30,93 50,94 Q 70,95 90,94 Q 110,93 130,95', strokeWidth: 5, delay: '0s' },
+          { type: 'path', className: 'hat-outline', d: 'M 12,100 Q 35,101 55,100 Q 75,99 95,100 Q 115,101 128,100', strokeWidth: 5, delay: '0.1s' },
+          // Crown sides
+          { type: 'path', className: 'hat-outline', d: 'M 40,95 Q 39,80 40,65 Q 41,50 39,35 Q 40,30 40,25', strokeWidth: 5, delay: '0.2s' },
+          { type: 'path', className: 'hat-outline', d: 'M 100,95 Q 101,80 100,65 Q 99,50 101,35 Q 100,30 100,25', strokeWidth: 5, delay: '0.25s' },
+          // Crown top
+          { type: 'path', className: 'hat-outline', d: 'M 40,25 Q 55,24 70,25 Q 85,26 100,25', strokeWidth: 5, delay: '0.35s' },
+          // Hatband
+          { type: 'path', className: 'hat-outline', d: 'M 40,70 Q 55,69 70,70 Q 85,71 100,70', strokeWidth: 4.5, delay: '0.45s' },
+          { type: 'path', className: 'hat-outline', d: 'M 40,78 Q 55,79 70,78 Q 85,77 100,78', strokeWidth: 4.5, delay: '0.5s' },
+        ]
+      },
+      {
+        type: 'svg',
+        style: {
+          top: '30%',
+          right: '44%',
+          width: '80px',
+          height: '100px',
+        },
+        viewBox: '0 0 80 100',
+        paths: [
+          // Monocle chain
+          // Lens fill
+          { type: 'path', className: 'hat-fill', d: 'M 50,25 Q 50,30 48,34 Q 44,38 40,38 Q 36,38 32,34 Q 30,30 30,25 Q 30,20 32,16 Q 36,12 40,12 Q 44,12 48,16 Q 50,20 50,25', fill: 'var(--primary-dark)', opacity: 0.1, strokeWidth: 0 },
+          // Rim
+          { type: 'path', className: 'hat-outline', d: 'M 50,25 Q 50,30 48,34 Q 44,38 40,38 Q 36,38 32,34 Q 30,30 30,25 Q 30,20 32,16 Q 36,12 40,12 Q 44,12 48,16 Q 50,20 50,25', strokeWidth: 3.5, delay: '0.35s' },
+          // Glare
+          { type: 'path', className: 'hat-fill', d: 'M 35,18 Q 37,16 39,17', strokeWidth: 2 },
+        ]
+      }
+    ]
+  },
+  // Effect 2: Sunglasses
+  {
+    id: 'sunglasses',
+    elements: [
+      {
+        type: 'svg',
+        style: {
+          top: '31%',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          width: '110px',
+          height: '50px',
+        },
+        viewBox: '0 0 110 50',
+        paths: [
+  // Left lens fill - unchanged
+  {
+    type: 'path',
+    className: 'hat-fill',
+    d: 'M 25,25 Q 25,18 29,14 Q 33,11 37,13 Q 41,15 42,20 Q 43,25 42,30 Q 41,34 37,36 Q 33,38 29,35 Q 25,31 25,25',
+    fill: 'var(--primary-dark)',
+    opacity: 0.4,
+    strokeWidth: 0,
+  },
+  // Left lens frame - unchanged
+  {
+    type: 'path',
+    className: 'hat-outline',
+    d: 'M 25,25 Q 25,18 29,14 Q 33,11 37,13 Q 41,15 42,20 Q 43,25 42,30 Q 41,34 37,36 Q 33,38 29,35 Q 25,31 25,25',
+    strokeWidth: 3.5,
+    delay: '0s',
+  },
+
+  // Right lens fill - moved left (lenses closer)
+  {
+    type: 'path',
+    className: 'hat-fill',
+    d: 'M 52,25 Q 52,18 56,14 Q 60,11 64,13 Q 68,15 69,20 Q 70,25 69,30 Q 68,34 64,36 Q 60,38 56,35 Q 52,31 52,25',
+    fill: 'var(--primary-dark)',
+    opacity: 0.4,
+    strokeWidth: 0,
+  },
+  // Right lens frame - moved left (lenses closer)
+  {
+    type: 'path',
+    className: 'hat-outline',
+    d: 'M 52,25 Q 52,18 56,14 Q 60,11 64,13 Q 68,15 69,20 Q 70,25 69,30 Q 68,34 64,36 Q 60,38 56,35 Q 52,31 52,25',
+    strokeWidth: 3.5,
+    delay: '0.1s',
+  },
+
+  // Bridge connecting the lenses - shorter and more compact
+  {
+    type: 'path',
+    className: 'hat-outline',
+    d: 'M 42,23 Q 47,21 52,23',
+    strokeWidth: 2,
+    delay: '0.15s',
+  },
+
+  // Left temple/arm - unchanged
+  {
+    type: 'path',
+    className: 'hat-outline',
+    d: 'M 25,23 Q 20,23 15,24 Q 12,25 10,26',
+    strokeWidth: 2.5,
+    delay: '0.2s',
+  },
+  // Right temple/arm - moved with right lens
+  {
+    type: 'path',
+    className: 'hat-outline',
+    d: 'M 69,23 Q 74,23 79,24 Q 82,25 84,26',
+    strokeWidth: 2.5,
+    delay: '0.25s',
+  },
+
+  // Lens details/reflections
+  { 
+    type: 'path',
+    className: 'hat-fill',
+    d: 'M 30,18 Q 32,16 34,17',
+    strokeWidth: 2,
+    opacity: 0.6,
+  },
+  { 
+    type: 'path',
+    className: 'hat-fill',
+    d: 'M 60,18 Q 62,16 64,17',
+    strokeWidth: 2,
+    opacity: 0.6,
+  },
+]
+
+      }
+    ]
+  },
+  // Effect 3: Party hat
+  {
+    id: 'party-hat',
+    elements: [
+      {
+        type: 'svg',
+        style: {
+          top: '-15px',
+          left: '52%',
+          transform: 'translateX(-50%)',
+          width: '100px',
+          height: '110px',
+        },
+        viewBox: '0 0 100 110',
+        paths: [
+          // Hat fill
+          // Hat outline
+          { type: 'path', className: 'hat-outline', d: 'M 20,90 Q 25,88 30,87 Q 40,85 50,15 Q 60,85 70,87 Q 75,88 80,90', strokeWidth: 4, delay: '0s' },
+          // Bottom trim
+          { type: 'path', className: 'hat-outline', d: 'M 18,90 Q 30,92 50,92 Q 70,92 82,90', strokeWidth: 3.5, delay: '0.1s' },
+          // Decorative dots
+          { type: 'circle', className: 'hat-fill', cx: 35, cy: 50, r: 3, fill: 'var(--primary)' },
+          { type: 'circle', className: 'hat-fill', cx: 50, cy: 40, r: 3, fill: 'var(--secondary-dark)' },
+          { type: 'circle', className: 'hat-fill', cx: 65, cy: 55, r: 3, fill: 'var(--primary)' },
+          // Pom-pom
+          { type: 'circle', className: 'hat-outline', cx: 50, cy: 12, r: 5, strokeWidth: 3, delay: '0.2s' },
+        ]
+      }
+    ]
+  },
+  // Effect 4: Mustache
+  {
+    id: 'mustache',
+    elements: [
+      {
+        type: 'svg',
+        style: {
+          top: '39%',
+          left: '44%',
+          transform: 'translateX(-50%)',
+          width: '140px',
+          height: '50px',
+        },
+        viewBox: '0 0 140 50',
+        paths: [
+          // Left mustache fill
+          { type: 'path', className: 'hat-fill', d: 'M 70,25 Q 65,20 58,18 Q 50,16 42,18 Q 35,20 28,25 Q 22,30 18,35 Q 15,40 12,42 Q 10,43 8,42 Q 6,40 8,38 Q 12,34 18,28 Q 25,22 35,20 Q 45,18 55,22 Q 62,25 68,28', fill: 'var(--primary-dark)', opacity: 0.7, strokeWidth: 0 },
+          // Left mustache outline - curls up at the end
+          { type: 'path', className: 'hat-outline', d: 'M 70,25 Q 65,20 58,18 Q 50,16 42,18 Q 35,20 28,25 Q 22,30 18,35 Q 15,40 12,42 Q 10,43 8,42 Q 6,40 8,38', strokeWidth: 3.5, delay: '0s' },
+          // Left inner detail
+          { type: 'path', className: 'hat-outline', d: 'M 68,26 Q 60,23 52,22 Q 45,21 38,24 Q 32,27 28,32', strokeWidth: 2, delay: '0.05s' },
+          
+          // Right mustache fill
+          { type: 'path', className: 'hat-fill', d: 'M 70,25 Q 75,20 82,18 Q 90,16 98,18 Q 105,20 112,25 Q 118,30 122,35 Q 125,40 128,42 Q 130,43 132,42 Q 134,40 132,38 Q 128,34 122,28 Q 115,22 105,20 Q 95,18 85,22 Q 78,25 72,28', fill: 'var(--primary-dark)', opacity: 0.7, strokeWidth: 0 },
+          // Right mustache outline - curls up at the end
+          { type: 'path', className: 'hat-outline', d: 'M 70,25 Q 75,20 82,18 Q 90,16 98,18 Q 105,20 112,25 Q 118,30 122,35 Q 125,40 128,42 Q 130,43 132,42 Q 134,40 132,38', strokeWidth: 3.5, delay: '0.1s' },
+          // Right inner detail
+          { type: 'path', className: 'hat-outline', d: 'M 72,26 Q 80,23 88,22 Q 95,21 102,24 Q 108,27 112,32', strokeWidth: 2, delay: '0.15s' },
+          
+          // Center divot
+          { type: 'path', className: 'hat-outline', d: 'M 70,25 Q 70,28 70,30', strokeWidth: 2.5, delay: '0.2s' },
+        ]
+      }
+    ]
+  },
+  
+  
+  // Effect 5: Chain necklace
+  {
+    id: 'chain-necklace',
+    elements: [
+      {
+        type: 'svg',
+        style: {
+          top: '56%',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          width: '170px',
+          height: '80px',
+        },
+        viewBox: '0 0 170 80',
+        paths: [
+          // Main chain curve
+          {
+            type: 'path',
+            className: 'hat-outline',
+            d: 'M 25,20 Q 45,50 65,60 Q 85,68 105,60 Q 125,50 145,20',
+            strokeWidth: 4,
+            delay: '0s',
+          },
+          // Left links
+          {
+            type: 'path',
+            className: 'hat-outline',
+            d: 'M 33,28 Q 37,35 41,39',
+            strokeWidth: 3,
+            delay: '0.05s',
+          },
+          {
+            type: 'path',
+            className: 'hat-outline',
+            d: 'M 43,36 Q 47,43 51,47',
+            strokeWidth: 3,
+            delay: '0.1s',
+          },
+          // Center links
+          {
+            type: 'path',
+            className: 'hat-outline',
+            d: 'M 66,52 Q 70,59 74,63',
+            strokeWidth: 3,
+            delay: '0.15s',
+          },
+          {
+            type: 'path',
+            className: 'hat-outline',
+            d: 'M 80,55 Q 84,62 88,66',
+            strokeWidth: 3,
+            delay: '0.2s',
+          },
+          // Right links
+          {
+            type: 'path',
+            className: 'hat-outline',
+            d: 'M 98,52 Q 102,59 106,63',
+            strokeWidth: 3,
+            delay: '0.25s',
+          },
+          {
+            type: 'path',
+            className: 'hat-outline',
+            d: 'M 112,46 Q 116,53 120,57',
+            strokeWidth: 3,
+            delay: '0.3s',
+          },
+          // Subtle scribble fill under chain
+          {
+            type: 'group',
+            className: 'hat-fill',
+            children: [
+              { type: 'line', x1: 60, y1: 60, x2: 65, y2: 70, strokeWidth: 2 },
+              { type: 'line', x1: 70, y1: 62, x2: 75, y2: 72, strokeWidth: 2 },
+              { type: 'line', x1: 80, y1: 62, x2: 85, y2: 72, strokeWidth: 2 },
+              { type: 'line', x1: 90, y1: 60, x2: 95, y2: 70, strokeWidth: 2 },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
+  // Effect 7: Viking helmet
+
+  // Effect 8: Crown
+  {
+    id: 'crown',
+    elements: [
+      {
+        type: 'svg',
+        style: {
+          top: '5px',
+          left: '55%',
+          transform: 'translateX(-50%)',
+          width: '130px',
+          height: '90px',
+        },
+        viewBox: '0 0 130 90',
+        paths: [
+          // Crown base
+          {
+            type: 'path',
+            className: 'hat-outline',
+            d: 'M 20,65 Q 45,68 65,68 Q 85,68 110,65',
+            strokeWidth: 4,
+            delay: '0s',
+          },
+          // Crown spikes
+          {
+            type: 'path',
+            className: 'hat-outline',
+            d: 'M 20,65 L 32,35 L 48,60 L 65,30 L 82,60 L 98,35 L 110,65',
+            strokeWidth: 4,
+            delay: '0.1s',
+          },
+          // Jewels
+          {
+            type: 'circle',
+            className: 'hat-fill',
+            cx: 32,
+            cy: 37,
+            r: 3,
+          },
+          {
+            type: 'circle',
+            className: 'hat-fill',
+            cx: 65,
+            cy: 32,
+            r: 4,
+          },
+          {
+            type: 'circle',
+            className: 'hat-fill',
+            cx: 98,
+            cy: 37,
+            r: 3,
+          },
+          // Slight scribble on base
+          {
+            type: 'group',
+            className: 'hat-fill',
+            children: [
+              { type: 'line', x1: 30, y1: 63, x2: 45, y2: 64, strokeWidth: 2 },
+              { type: 'line', x1: 50, y1: 65, x2: 65, y2: 66, strokeWidth: 2 },
+              { type: 'line', x1: 70, y1: 66, x2: 85, y2: 65, strokeWidth: 2 },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
+  // Effect 10: Halo
+];
+
+function HandDrawnEffect({ effect }: { effect: typeof HAND_DRAWN_EFFECTS[0] }) {
+  return (
+    <>
+      {effect.elements.map((element, idx) => (
+        <svg
+          key={`${effect.id}-${idx}`}
+          className="absolute pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 top-hat-svg"
+          style={{
+            ...element.style,
+            overflow: 'visible'
+          }}
+          viewBox={element.viewBox}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          {element.paths.map((path, pathIdx) => {
+            if (path.type === 'group') {
+              return (
+                <g key={pathIdx} className={path.className}>
+                  {path.children?.map((child, childIdx) => (
+                    <line
+                      key={childIdx}
+                      x1={child.x1}
+                      y1={child.y1}
+                      x2={child.x2}
+                      y2={child.y2}
+                      stroke="var(--primary-dark)"
+                      strokeWidth={child.strokeWidth}
+                    />
+                  ))}
+                </g>
+              );
+            } else if (path.type === 'line') {
+              return (
+                <line
+                  key={pathIdx}
+                  className={path.className}
+                  x1={path.x1}
+                  y1={path.y1}
+                  x2={path.x2}
+                  y2={path.y2}
+                  stroke="var(--primary-dark)"
+                  strokeWidth={path.strokeWidth}
+                  strokeLinecap="round"
+                  style={path.delay ? {
+                    strokeDasharray: '1000',
+                    strokeDashoffset: '1000',
+                    animationDelay: path.delay
+                  } : undefined}
+                />
+              );
+            } else if (path.type === 'circle') {
+              return (
+                <circle
+                  key={pathIdx}
+                  className={path.className}
+                  cx={path.cx}
+                  cy={path.cy}
+                  r={path.r}
+                  fill={path.fill || 'none'}
+                  stroke={path.fill ? 'none' : 'var(--primary-dark)'}
+                  strokeWidth={path.strokeWidth || 0}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  style={path.delay ? {
+                    strokeDasharray: '1000',
+                    strokeDashoffset: '1000',
+                    animationDelay: path.delay
+                  } : undefined}
+                />
+              );
+            } else {
+              return (
+                <path
+                  key={pathIdx}
+                  className={path.className}
+                  d={path.d}
+                  fill={path.fill || 'none'}
+                  stroke={path.fill && path.strokeWidth === 0 ? 'none' : 'var(--primary-dark)'}
+                  strokeWidth={path.strokeWidth}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  opacity={path.opacity}
+                  style={path.delay ? {
+                    strokeDasharray: '1000',
+                    strokeDashoffset: '1000',
+                    animationDelay: path.delay
+                  } : undefined}
+                />
+              );
+            }
+          })}
+        </svg>
+      ))}
+    </>
+  );
+}
+
 // ---------- Main Component ----------
 export default function Site() {
   const [mounted, setMounted] = useState(false);
+  const [selectedEffect, setSelectedEffect] = useState(HAND_DRAWN_EFFECTS[0]);
 
   useEffect(() => { setMounted(true); }, []);
+
+  // Pick a random effect on hover
+  const handleMouseEnter = () => {
+    const randomEffect = HAND_DRAWN_EFFECTS[Math.floor(Math.random() * HAND_DRAWN_EFFECTS.length)];
+    setSelectedEffect(randomEffect);
+  };
 
   return (
     <main className="mx-auto max-w-7xl" style={{ padding: '0 3rem 4rem' }}>
@@ -405,6 +900,7 @@ export default function Site() {
                   border: '4px solid var(--primary)',
                   transitionDuration: 'var(--transition-slow)'
                 }}
+                onMouseEnter={handleMouseEnter}
               >
                 <div className="relative w-full h-full rounded-2xl overflow-hidden">
                   <Image
@@ -417,214 +913,8 @@ export default function Site() {
                   />
                 </div>
 
-                {/* Hand-drawn top hat - 2D side view with scribbled fill */}
-                <svg
-                  className="absolute pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 top-hat-svg"
-                  style={{
-                    top: '-20px',
-                    left: '55%',
-                    transform: 'translateX(-50%)',
-                    width: '140px',
-                    height: '120px',
-                    overflow: 'visible'
-                  }}
-                  viewBox="0 0 140 120"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  {/* Scribbled fill for crown */}
-                  <g className="hat-fill">
-                    <line x1="42" y1="92" x2="45" y2="28" stroke="var(--primary-dark)" strokeWidth="5" />
-                    <line x1="46" y1="91" x2="49" y2="29" stroke="var(--primary-dark)" strokeWidth="5" />
-                    <line x1="50" y1="92" x2="53" y2="28" stroke="var(--primary-dark)" strokeWidth="5" />
-                    <line x1="54" y1="91" x2="57" y2="29" stroke="var(--primary-dark)" strokeWidth="5" />
-                    <line x1="58" y1="92" x2="61" y2="28" stroke="var(--primary-dark)" strokeWidth="5" />
-                    <line x1="62" y1="91" x2="65" y2="29" stroke="var(--primary-dark)" strokeWidth="5" />
-                    <line x1="66" y1="92" x2="69" y2="28" stroke="var(--primary-dark)" strokeWidth="5" />
-                    <line x1="70" y1="91" x2="73" y2="29" stroke="var(--primary-dark)" strokeWidth="5" />
-                    <line x1="74" y1="92" x2="77" y2="28" stroke="var(--primary-dark)" strokeWidth="5" />
-                    <line x1="78" y1="91" x2="81" y2="29" stroke="var(--primary-dark)" strokeWidth="5" />
-                    <line x1="82" y1="92" x2="85" y2="28" stroke="var(--primary-dark)" strokeWidth="5" />
-                    <line x1="86" y1="91" x2="89" y2="29" stroke="var(--primary-dark)" strokeWidth="5" />
-                    <line x1="90" y1="92" x2="93" y2="28" stroke="var(--primary-dark)" strokeWidth="5" />
-                    <line x1="94" y1="91" x2="97" y2="29" stroke="var(--primary-dark)" strokeWidth="5" />
-                  </g>
-
-                  {/* Wide brim - hand-drawn wavy line */}
-                  <path
-                    className="hat-outline"
-                    d="M 10,95 Q 30,93 50,94 Q 70,95 90,94 Q 110,93 130,95"
-                    fill="none"
-                    stroke="var(--primary-dark)"
-                    strokeWidth="5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    style={{
-                      strokeDasharray: '1000',
-                      strokeDashoffset: '1000',
-                      animationDelay: '0s'
-                    }}
-                  />
-                  
-                  {/* Brim thickness - bottom edge with slight wobble */}
-                  <path
-                    className="hat-outline"
-                    d="M 12,100 Q 35,101 55,100 Q 75,99 95,100 Q 115,101 128,100"
-                    fill="none"
-                    stroke="var(--primary-dark)"
-                    strokeWidth="5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    style={{
-                      strokeDasharray: '1000',
-                      strokeDashoffset: '1000',
-                      animationDelay: '0.1s'
-                    }}
-                  />
-                  
-                  {/* Left side of crown - slightly curved */}
-                  <path
-                    className="hat-outline"
-                    d="M 40,95 Q 39,80 40,65 Q 41,50 39,35 Q 40,30 40,25"
-                    fill="none"
-                    stroke="var(--primary-dark)"
-                    strokeWidth="5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    style={{
-                      strokeDasharray: '1000',
-                      strokeDashoffset: '1000',
-                      animationDelay: '0.2s'
-                    }}
-                  />
-                  
-                  {/* Right side of crown - slightly curved opposite direction */}
-                  <path
-                    className="hat-outline"
-                    d="M 100,95 Q 101,80 100,65 Q 99,50 101,35 Q 100,30 100,25"
-                    fill="none"
-                    stroke="var(--primary-dark)"
-                    strokeWidth="5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    style={{
-                      strokeDasharray: '1000',
-                      strokeDashoffset: '1000',
-                      animationDelay: '0.25s'
-                    }}
-                  />
-                  
-                  {/* Top of crown - slight wave */}
-                  <path
-                    className="hat-outline"
-                    d="M 40,25 Q 55,24 70,25 Q 85,26 100,25"
-                    fill="none"
-                    stroke="var(--primary-dark)"
-                    strokeWidth="5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    style={{
-                      strokeDasharray: '1000',
-                      strokeDashoffset: '1000',
-                      animationDelay: '0.35s'
-                    }}
-                  />
-                  
-                  {/* Hatband top - wavy */}
-                  <path
-                    className="hat-outline"
-                    d="M 40,70 Q 55,69 70,70 Q 85,71 100,70"
-                    fill="none"
-                    stroke="var(--primary-dark)"
-                    strokeWidth="4.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    style={{
-                      strokeDasharray: '1000',
-                      strokeDashoffset: '1000',
-                      animationDelay: '0.45s'
-                    }}
-                  />
-                  
-                  {/* Hatband bottom - wavy */}
-                  <path
-                    className="hat-outline"
-                    d="M 40,78 Q 55,79 70,78 Q 85,77 100,78"
-                    fill="none"
-                    stroke="var(--primary-dark)"
-                    strokeWidth="4.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    style={{
-                      strokeDasharray: '1000',
-                      strokeDashoffset: '1000',
-                      animationDelay: '0.5s'
-                    }}
-                  />
-                </svg>
-
-                {/* Hand-drawn monocle */}
-                <svg
-                  className="absolute pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 top-hat-svg"
-                  style={{
-                    top: '30%',
-                    right: '44%',
-                    width: '80px',
-                    height: '100px',
-                    overflow: 'visible'
-                  }}
-                  viewBox="0 0 80 100"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  {/* Monocle chain/string - hangs down naturally with a bigger loop */}
-                  <path
-                    className="hat-outline"
-                    d="M 40,25 L 40,30 Q 40,35 38,40 Q 36,45 35,50 Q 34,58 30,64 Q 25,70 18,70 Q 11,70 8,64 Q 5,58 7,52 Q 9,46 13,42 Q 17,38 22,36 Q 27,34 32,34 Q 36,34 38,32"
-                    fill="none"
-                    stroke="var(--primary-dark)"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    style={{
-                      strokeDasharray: '1000',
-                      strokeDashoffset: '1000',
-                      animationDelay: '0.3s'
-                    }}
-                  />
-                  
-                  {/* Monocle lens fill - subtle tint */}
-                  <path
-                    className="hat-fill"
-                    d="M 50,25 Q 50,30 48,34 Q 44,38 40,38 Q 36,38 32,34 Q 30,30 30,25 Q 30,20 32,16 Q 36,12 40,12 Q 44,12 48,16 Q 50,20 50,25"
-                    fill="var(--primary-dark)"
-                    opacity="0.1"
-                    stroke="none"
-                  />
-                  
-                  {/* Monocle rim - hand-drawn imperfect circle, smaller */}
-                  <path
-                    className="hat-outline"
-                    d="M 50,25 Q 50,30 48,34 Q 44,38 40,38 Q 36,38 32,34 Q 30,30 30,25 Q 30,20 32,16 Q 36,12 40,12 Q 44,12 48,16 Q 50,20 50,25"
-                    fill="none"
-                    stroke="var(--primary-dark)"
-                    strokeWidth="3.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    style={{
-                      strokeDasharray: '1000',
-                      strokeDashoffset: '1000',
-                      animationDelay: '0.35s'
-                    }}
-                  />
-                  
-                  {/* Small lens glare - simple curved line */}
-                  <path
-                    className="hat-fill"
-                    d="M 35,18 Q 37,16 39,17"
-                    stroke="var(--primary-dark)"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    fill="none"
-                  />
-                </svg>
+                {/* Render the selected hand-drawn effect */}
+                <HandDrawnEffect effect={selectedEffect} />
               </div>
             </div>
           </div>
@@ -694,49 +984,44 @@ export default function Site() {
       <section id="experience" style={{ paddingTop: 'var(--spacing-3xl)', paddingBottom: 'var(--spacing-3xl)' }}>
         <SectionHeading>Experience</SectionHeading>
         <div className="space-y-8">
-          {DATA.experience.map((exp, i) => {
-            const { ref, isVisible } = useScrollAnimation();
-            return (
-              <div
-                key={exp.role}
-                ref={ref as React.RefObject<HTMLDivElement>}
-                className={cx("border-l-2 pl-6 opacity-0", isVisible && "animate-fade-in-up opacity-100")}
-                style={{
-                  borderColor: 'var(--primary)',
-                  animationDelay: `${i * 60}ms`
-                }}
-              >
-                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-2" style={{ marginBottom: 'var(--spacing-sm)' }}>
-                  <h3 className="font-semibold" style={{ fontSize: 'var(--font-size-h3)' }}>
-                    {exp.role}
-                  </h3>
-                  <span style={{ fontSize: 'var(--font-size-small)', color: 'var(--gray-500)' }}>
-                    {exp.period}
-                  </span>
-                </div>
-                <p className="font-medium" style={{ fontSize: 'var(--font-size-body)', color: 'var(--primary)', marginBottom: 'var(--spacing-sm)' }}>
-                  {exp.company}
-                </p>
-                <ul className="space-y-2">
-                  {exp.description.map((point, idx) => (
-                    <li
-                      key={idx}
-                      className="flex gap-2 transition-all hover:translate-x-1"
-                      style={{
-                        fontSize: 'var(--font-size-body)',
-                        color: 'var(--gray-600)',
-                        lineHeight: 'var(--line-height-relaxed)',
-                        transitionDuration: 'var(--transition-fast)'
-                      }}
-                    >
-                      <span style={{ color: 'var(--primary)', fontSize: '1.2em' }}>✦</span>
-                      <span>{point}</span>
-                    </li>
-                  ))}
-                </ul>
+          {DATA.experience.map((exp) => (
+            <div
+              key={exp.role}
+              className="border-l-2 pl-6"
+              style={{
+                borderColor: 'var(--primary)',
+                opacity: 0.96
+              }}
+            >
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-2" style={{ marginBottom: 'var(--spacing-sm)' }}>
+                <h3 className="font-semibold" style={{ fontSize: 'var(--font-size-h3)' }}>
+                  {exp.role}
+                </h3>
+                <span style={{ fontSize: 'var(--font-size-small)', color: 'var(--gray-500)' }}>
+                  {exp.period}
+                </span>
               </div>
-            );
-          })}
+              <p className="font-medium" style={{ fontSize: 'var(--font-size-body)', color: 'var(--primary)', marginBottom: 'var(--spacing-sm)' }}>
+                {exp.company}
+              </p>
+              <ul className="space-y-2">
+                {exp.description.map((point, idx) => (
+                  <li
+                    key={idx}
+                    className="flex gap-2"
+                    style={{
+                      fontSize: 'var(--font-size-body)',
+                      color: 'var(--gray-600)',
+                      lineHeight: 'var(--line-height-relaxed)'
+                    }}
+                  >
+                    <span style={{ color: 'var(--primary)', fontSize: '1.2em' }}>✦</span>
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
       </section>
 
