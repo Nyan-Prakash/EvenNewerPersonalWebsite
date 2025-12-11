@@ -417,84 +417,30 @@ export default function Site() {
                   />
                 </div>
 
-                {/* Hand-drawn vines - animated on hover, wrapping around frame */}
-
-
                 {/* Hand-drawn top hat - Top of head */}
                 <svg
                   className="absolute pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 top-hat-svg"
                   style={{
-                    top: '-125px',
-                    left: '50%',
+                    top: '-70px',
+                    left: '55%',
                     transform: 'translateX(-50%)',
-                    width: '180px',
-                    height: '180px',
+                    width: '160px',
+                    height: '170px',
                     overflow: 'visible'
                   }}
-                  viewBox="0 0 180 180"
+                  viewBox="0 0 160 170"
                   xmlns="http://www.w3.org/2000/svg"
                 >
-                  {/* Dense diagonal scribble fill - much more filled in */}
-                  <g className="hat-scribble">
-                    {/* Brim fill - diagonal lines */}
-                    <line x1="48" y1="145" x2="63" y2="130" stroke="var(--primary-dark)" strokeWidth="1.5" strokeLinecap="round"/>
-                    <line x1="52" y1="145" x2="67" y2="130" stroke="var(--primary-dark)" strokeWidth="1.5" strokeLinecap="round"/>
-                    <line x1="56" y1="145" x2="71" y2="130" stroke="var(--primary-dark)" strokeWidth="1.5" strokeLinecap="round"/>
-                    <line x1="60" y1="145" x2="75" y2="130" stroke="var(--primary-dark)" strokeWidth="1.5" strokeLinecap="round"/>
-                    <line x1="64" y1="145" x2="79" y2="130" stroke="var(--primary-dark)" strokeWidth="1.5" strokeLinecap="round"/>
-                    <line x1="68" y1="145" x2="83" y2="130" stroke="var(--primary-dark)" strokeWidth="1.5" strokeLinecap="round"/>
-                    <line x1="72" y1="145" x2="87" y2="130" stroke="var(--primary-dark)" strokeWidth="1.5" strokeLinecap="round"/>
-                    <line x1="76" y1="145" x2="91" y2="130" stroke="var(--primary-dark)" strokeWidth="1.5" strokeLinecap="round"/>
-                    <line x1="80" y1="145" x2="95" y2="130" stroke="var(--primary-dark)" strokeWidth="1.5" strokeLinecap="round"/>
-                    <line x1="84" y1="145" x2="99" y2="130" stroke="var(--primary-dark)" strokeWidth="1.5" strokeLinecap="round"/>
-                    <line x1="88" y1="145" x2="103" y2="130" stroke="var(--primary-dark)" strokeWidth="1.5" strokeLinecap="round"/>
-                    <line x1="92" y1="145" x2="107" y2="130" stroke="var(--primary-dark)" strokeWidth="1.5" strokeLinecap="round"/>
-                    <line x1="96" y1="145" x2="111" y2="130" stroke="var(--primary-dark)" strokeWidth="1.5" strokeLinecap="round"/>
-                    <line x1="100" y1="145" x2="115" y2="130" stroke="var(--primary-dark)" strokeWidth="1.5" strokeLinecap="round"/>
-                    <line x1="104" y1="145" x2="119" y2="130" stroke="var(--primary-dark)" strokeWidth="1.5" strokeLinecap="round"/>
-                    <line x1="108" y1="145" x2="123" y2="130" stroke="var(--primary-dark)" strokeWidth="1.5" strokeLinecap="round"/>
-                    <line x1="112" y1="145" x2="127" y2="130" stroke="var(--primary-dark)" strokeWidth="1.5" strokeLinecap="round"/>
-                    <line x1="116" y1="145" x2="131" y2="130" stroke="var(--primary-dark)" strokeWidth="1.5" strokeLinecap="round"/>
-                    
-                    {/* Cylinder body fill - many more diagonal lines for dense coverage */}
-                    <line x1="53" y1="130" x2="56" y2="110" stroke="var(--primary-dark)" strokeWidth="1.5" strokeLinecap="round"/>
-                    <line x1="56" y1="130" x2="59" y2="105" stroke="var(--primary-dark)" strokeWidth="1.5" strokeLinecap="round"/>
-                    <line x1="59" y1="130" x2="62" y2="100" stroke="var(--primary-dark)" strokeWidth="1.5" strokeLinecap="round"/>
-                    <line x1="62" y1="130" x2="65" y2="95" stroke="var(--primary-dark)" strokeWidth="1.5" strokeLinecap="round"/>
-                    <line x1="65" y1="130" x2="68" y2="90" stroke="var(--primary-dark)" strokeWidth="1.5" strokeLinecap="round"/>
-                    <line x1="68" y1="130" x2="71" y2="85" stroke="var(--primary-dark)" strokeWidth="1.5" strokeLinecap="round"/>
-                    <line x1="71" y1="130" x2="74" y2="75" stroke="var(--primary-dark)" strokeWidth="1.5" strokeLinecap="round"/>
-                    <line x1="74" y1="130" x2="77" y2="65" stroke="var(--primary-dark)" strokeWidth="1.5" strokeLinecap="round"/>
-                    <line x1="77" y1="130" x2="80" y2="55" stroke="var(--primary-dark)" strokeWidth="1.5" strokeLinecap="round"/>
-                    <line x1="80" y1="130" x2="83" y2="45" stroke="var(--primary-dark)" strokeWidth="1.5" strokeLinecap="round"/>
-                    <line x1="83" y1="130" x2="86" y2="38" stroke="var(--primary-dark)" strokeWidth="1.5" strokeLinecap="round"/>
-                    <line x1="86" y1="130" x2="89" y2="32" stroke="var(--primary-dark)" strokeWidth="1.5" strokeLinecap="round"/>
-                    <line x1="89" y1="130" x2="92" y2="30" stroke="var(--primary-dark)" strokeWidth="1.5" strokeLinecap="round"/>
-                    <line x1="92" y1="130" x2="95" y2="28" stroke="var(--primary-dark)" strokeWidth="1.5" strokeLinecap="round"/>
-                    <line x1="95" y1="130" x2="98" y2="28" stroke="var(--primary-dark)" strokeWidth="1.5" strokeLinecap="round"/>
-                    <line x1="98" y1="130" x2="101" y2="28" stroke="var(--primary-dark)" strokeWidth="1.5" strokeLinecap="round"/>
-                    <line x1="101" y1="130" x2="104" y2="30" stroke="var(--primary-dark)" strokeWidth="1.5" strokeLinecap="round"/>
-                    <line x1="104" y1="130" x2="107" y2="32" stroke="var(--primary-dark)" strokeWidth="1.5" strokeLinecap="round"/>
-                    <line x1="107" y1="130" x2="110" y2="38" stroke="var(--primary-dark)" strokeWidth="1.5" strokeLinecap="round"/>
-                    <line x1="110" y1="130" x2="113" y2="45" stroke="var(--primary-dark)" strokeWidth="1.5" strokeLinecap="round"/>
-                    <line x1="113" y1="130" x2="116" y2="55" stroke="var(--primary-dark)" strokeWidth="1.5" strokeLinecap="round"/>
-                    <line x1="116" y1="130" x2="119" y2="65" stroke="var(--primary-dark)" strokeWidth="1.5" strokeLinecap="round"/>
-                    <line x1="119" y1="130" x2="122" y2="75" stroke="var(--primary-dark)" strokeWidth="1.5" strokeLinecap="round"/>
-                    <line x1="122" y1="130" x2="125" y2="85" stroke="var(--primary-dark)" strokeWidth="1.5" strokeLinecap="round"/>
-                    <line x1="125" y1="130" x2="128" y2="95" stroke="var(--primary-dark)" strokeWidth="1.5" strokeLinecap="round"/>
-                    <line x1="128" y1="130" x2="127" y2="105" stroke="var(--primary-dark)" strokeWidth="1.5" strokeLinecap="round"/>
-                  </g>
-
-                  {/* Wide brim base - hand drawn with slight wobble */}
+                  {/* Wide brim - bottom ellipse */}
                   <ellipse
                     className="hat-outline"
-                    cx="90"
+                    cx="80"
                     cy="145"
                     rx="45"
                     ry="8"
                     fill="none"
                     stroke="var(--primary-dark)"
-                    strokeWidth="4"
+                    strokeWidth="5"
                     strokeLinecap="round"
                     style={{
                       strokeDasharray: '1000',
@@ -503,16 +449,16 @@ export default function Site() {
                     }}
                   />
                   
-                  {/* Brim top - thicker visible edge */}
+                  {/* Brim top edge */}
                   <ellipse
                     className="hat-outline"
-                    cx="90"
-                    cy="132"
-                    rx="50"
+                    cx="80"
+                    cy="135"
+                    rx="48"
                     ry="9"
                     fill="none"
                     stroke="var(--primary-dark)"
-                    strokeWidth="4.5"
+                    strokeWidth="5"
                     strokeLinecap="round"
                     style={{
                       strokeDasharray: '1000',
@@ -524,10 +470,10 @@ export default function Site() {
                   {/* Left side of cylinder */}
                   <path
                     className="hat-outline"
-                    d="M 53,132 Q 52,105 51,75 Q 50,50 51,30"
+                    d="M 48,135 Q 47,100 46,65 Q 45,40 46,25"
                     fill="none"
                     stroke="var(--primary-dark)"
-                    strokeWidth="4"
+                    strokeWidth="5"
                     strokeLinecap="round"
                     style={{
                       strokeDasharray: '1000',
@@ -539,10 +485,10 @@ export default function Site() {
                   {/* Right side of cylinder */}
                   <path
                     className="hat-outline"
-                    d="M 127,132 Q 128,105 129,75 Q 130,50 129,30"
+                    d="M 112,135 Q 113,100 114,65 Q 115,40 114,25"
                     fill="none"
                     stroke="var(--primary-dark)"
-                    strokeWidth="4"
+                    strokeWidth="5"
                     strokeLinecap="round"
                     style={{
                       strokeDasharray: '1000',
@@ -554,13 +500,13 @@ export default function Site() {
                   {/* Hat top ellipse */}
                   <ellipse
                     className="hat-outline"
-                    cx="90"
-                    cy="28"
-                    rx="38"
-                    ry="8"
+                    cx="80"
+                    cy="25"
+                    rx="34"
+                    ry="7"
                     fill="none"
                     stroke="var(--primary-dark)"
-                    strokeWidth="4"
+                    strokeWidth="5"
                     strokeLinecap="round"
                     style={{
                       strokeDasharray: '1000',
@@ -569,13 +515,13 @@ export default function Site() {
                     }}
                   />
                   
-                  {/* Hatband - top edge */}
+                  {/* Simple hatband */}
                   <path
                     className="hat-outline"
-                    d="M 51,100 Q 60,98 75,97 Q 90,96 105,97 Q 120,98 129,100"
+                    d="M 46,90 Q 55,88 70,87 Q 80,86 90,87 Q 105,88 114,90"
                     fill="none"
                     stroke="var(--primary-dark)"
-                    strokeWidth="3.5"
+                    strokeWidth="4.5"
                     strokeLinecap="round"
                     style={{
                       strokeDasharray: '1000',
@@ -584,62 +530,17 @@ export default function Site() {
                     }}
                   />
                   
-                  {/* Hatband - bottom edge */}
                   <path
                     className="hat-outline"
-                    d="M 51,108 Q 60,106 75,105 Q 90,104 105,105 Q 120,106 129,108"
+                    d="M 46,97 Q 55,95 70,94 Q 80,93 90,94 Q 105,95 114,97"
                     fill="none"
                     stroke="var(--primary-dark)"
-                    strokeWidth="3.5"
+                    strokeWidth="4.5"
                     strokeLinecap="round"
                     style={{
                       strokeDasharray: '1000',
                       strokeDashoffset: '1000',
                       animationDelay: '0.5s'
-                    }}
-                  />
-                  
-                  {/* Hatband connection lines */}
-                  <line
-                    className="hat-detail"
-                    x1="51"
-                    y1="100"
-                    x2="51"
-                    y2="108"
-                    stroke="var(--primary-dark)"
-                    strokeWidth="3.5"
-                    strokeLinecap="round"
-                    style={{
-                      animationDelay: '0.55s'
-                    }}
-                  />
-                  <line
-                    className="hat-detail"
-                    x1="129"
-                    y1="100"
-                    x2="129"
-                    y2="108"
-                    stroke="var(--primary-dark)"
-                    strokeWidth="3.5"
-                    strokeLinecap="round"
-                    style={{
-                      animationDelay: '0.6s'
-                    }}
-                  />
-                  
-                  {/* Small decorative detail on band - center buckle */}
-                  <rect
-                    className="hat-detail"
-                    x="85"
-                    y="101"
-                    width="10"
-                    height="6"
-                    rx="1"
-                    fill="none"
-                    stroke="var(--primary-dark)"
-                    strokeWidth="2.5"
-                    style={{
-                      animationDelay: '0.65s'
                     }}
                   />
                 </svg>
