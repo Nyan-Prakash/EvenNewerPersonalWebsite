@@ -21,6 +21,7 @@ const DATA = {
   cta: {
     resumeHref: "/resume.pdf",
     email: "mailto:nyanjprakash@gmail.com",
+    calendarly: "https://calendly.com/nyanjprakash/30min",
     phone: "tel:315-882-6569",
   },
   socials: [
@@ -827,7 +828,7 @@ export default function Site() {
 
             <div className="flex flex-wrap gap-4">
               <Link
-                href={DATA.cta.email}
+                href={DATA.cta.calendarly}
                 className="btn-primary rounded-lg px-8 py-3 font-medium transition-all relative"
                 style={{
                   backgroundColor: 'var(--primary)',
@@ -844,7 +845,7 @@ export default function Site() {
                   e.currentTarget.style.transform = 'translateY(0)';
                 }}
               >
-                Get in Touch
+                Schedule A Meeting
               </Link>
               <Link
                 href={DATA.cta.resumeHref}
