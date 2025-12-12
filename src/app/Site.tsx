@@ -762,10 +762,12 @@ function HandDrawnEffect({ effect }: { effect: typeof HAND_DRAWN_EFFECTS[0] }) {
           viewBox={element.viewBox}
           xmlns="http://www.w3.org/2000/svg"
         >
+          {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
           {element.paths.map((pathItem: any, pathIdx: number) => {
             if (pathItem.type === 'group') {
               return (
                 <g key={pathIdx} className={pathItem.className}>
+                  {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                   {pathItem.children?.map((child: any, childIdx: number) => (
                     <line
                       key={childIdx}
