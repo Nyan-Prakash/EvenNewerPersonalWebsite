@@ -979,8 +979,8 @@ export default function Site() {
           </div>
 
           {/* Right: Photo */}
-          <div className="flex justify-center md:justify-end order-1 md:order-2">
-            <div className="relative w-full flex justify-center md:justify-end" style={{ padding: '80px 0 40px' }}>
+          <div className="flex justify-center order-1 md:order-2 md:justify-end -ml-9.5 md:ml-0">
+            <div className="relative flex justify-center md:justify-end" style={{ padding: '80px 0 40px' }}>
               {/* Photo */}
               <div
                 className="relative w-80 h-80 lg:w-96 lg:h-96 rounded-2xl overflow-visible shadow-2x group"
