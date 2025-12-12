@@ -762,11 +762,11 @@ function HandDrawnEffect({ effect }: { effect: typeof HAND_DRAWN_EFFECTS[0] }) {
           viewBox={element.viewBox}
           xmlns="http://www.w3.org/2000/svg"
         >
-          {element.paths.map((path: any, pathIdx: number) => {
-            if (path.type === 'group') {
+          {element.paths.map((pathItem: any, pathIdx: number) => {
+            if (pathItem.type === 'group') {
               return (
-                <g key={pathIdx} className={path.className}>
-                  {path.children?.map((child: any, childIdx: number) => (
+                <g key={pathIdx} className={pathItem.className}>
+                  {pathItem.children?.map((child: any, childIdx: number) => (
                     <line
                       key={childIdx}
                       x1={child.x1}
@@ -779,42 +779,42 @@ function HandDrawnEffect({ effect }: { effect: typeof HAND_DRAWN_EFFECTS[0] }) {
                   ))}
                 </g>
               );
-            } else if (path.type === 'line') {
+            } else if (pathItem.type === 'line') {
               return (
                 <line
                   key={pathIdx}
-                  className={path.className}
-                  x1={path.x1}
-                  y1={path.y1}
-                  x2={path.x2}
-                  y2={path.y2}
+                  className={pathItem.className}
+                  x1={pathItem.x1}
+                  y1={pathItem.y1}
+                  x2={pathItem.x2}
+                  y2={pathItem.y2}
                   stroke="var(--primary-dark)"
-                  strokeWidth={path.strokeWidth}
+                  strokeWidth={pathItem.strokeWidth}
                   strokeLinecap="round"
-                  style={path.delay ? {
+                  style={pathItem.delay ? {
                     strokeDasharray: '1000',
                     strokeDashoffset: '1000',
-                    animationDelay: path.delay
+                    animationDelay: pathItem.delay
                   } : undefined}
                 />
               );
-            } else if (path.type === 'circle') {
+            } else if (pathItem.type === 'circle') {
               return (
                 <circle
                   key={pathIdx}
-                  className={path.className}
-                  cx={path.cx}
-                  cy={path.cy}
-                  r={path.r}
-                  fill={path.fill || 'none'}
-                  stroke={path.fill ? 'none' : 'var(--primary-dark)'}
-                  strokeWidth={path.strokeWidth || 0}
+                  className={pathItem.className}
+                  cx={pathItem.cx}
+                  cy={pathItem.cy}
+                  r={pathItem.r}
+                  fill={pathItem.fill || 'none'}
+                  stroke={pathItem.fill ? 'none' : 'var(--primary-dark)'}
+                  strokeWidth={pathItem.strokeWidth || 0}
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  style={path.delay ? {
+                  style={pathItem.delay ? {
                     strokeDasharray: '1000',
                     strokeDashoffset: '1000',
-                    animationDelay: path.delay
+                    animationDelay: pathItem.delay
                   } : undefined}
                 />
               );
@@ -822,18 +822,18 @@ function HandDrawnEffect({ effect }: { effect: typeof HAND_DRAWN_EFFECTS[0] }) {
               return (
                 <path
                   key={pathIdx}
-                  className={path.className}
-                  d={path.d}
-                  fill={path.fill || 'none'}
-                  stroke={path.fill && path.strokeWidth === 0 ? 'none' : 'var(--primary-dark)'}
-                  strokeWidth={path.strokeWidth}
+                  className={pathItem.className}
+                  d={pathItem.d}
+                  fill={pathItem.fill || 'none'}
+                  stroke={pathItem.fill && pathItem.strokeWidth === 0 ? 'none' : 'var(--primary-dark)'}
+                  strokeWidth={pathItem.strokeWidth}
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  opacity={path.opacity}
-                  style={path.delay ? {
+                  opacity={pathItem.opacity}
+                  style={pathItem.delay ? {
                     strokeDasharray: '1000',
                     strokeDashoffset: '1000',
-                    animationDelay: path.delay
+                    animationDelay: pathItem.delay
                   } : undefined}
                 />
               );
