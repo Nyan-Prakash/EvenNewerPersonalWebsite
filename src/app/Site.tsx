@@ -504,93 +504,6 @@ const HAND_DRAWN_EFFECTS = [
       }
     ]
   },
-  
-  
-  // Effect 5: Chain necklace
-  {
-    id: 'chain-necklace',
-    elements: [
-      {
-        type: 'svg',
-        style: {
-          top: '56%',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          width: '170px',
-          height: '80px',
-        },
-        viewBox: '0 0 170 80',
-        paths: [
-          // Main chain curve
-          {
-            type: 'path',
-            className: 'hat-outline',
-            d: 'M 25,20 Q 45,50 65,60 Q 85,68 105,60 Q 125,50 145,20',
-            strokeWidth: 4,
-            delay: '0s',
-          },
-          // Left links
-          {
-            type: 'path',
-            className: 'hat-outline',
-            d: 'M 33,28 Q 37,35 41,39',
-            strokeWidth: 3,
-            delay: '0.05s',
-          },
-          {
-            type: 'path',
-            className: 'hat-outline',
-            d: 'M 43,36 Q 47,43 51,47',
-            strokeWidth: 3,
-            delay: '0.1s',
-          },
-          // Center links
-          {
-            type: 'path',
-            className: 'hat-outline',
-            d: 'M 66,52 Q 70,59 74,63',
-            strokeWidth: 3,
-            delay: '0.15s',
-          },
-          {
-            type: 'path',
-            className: 'hat-outline',
-            d: 'M 80,55 Q 84,62 88,66',
-            strokeWidth: 3,
-            delay: '0.2s',
-          },
-          // Right links
-          {
-            type: 'path',
-            className: 'hat-outline',
-            d: 'M 98,52 Q 102,59 106,63',
-            strokeWidth: 3,
-            delay: '0.25s',
-          },
-          {
-            type: 'path',
-            className: 'hat-outline',
-            d: 'M 112,46 Q 116,53 120,57',
-            strokeWidth: 3,
-            delay: '0.3s',
-          },
-          // Subtle scribble fill under chain
-          {
-            type: 'group',
-            className: 'hat-fill',
-            children: [
-              { type: 'line', x1: 60, y1: 60, x2: 65, y2: 70, strokeWidth: 2 },
-              { type: 'line', x1: 70, y1: 62, x2: 75, y2: 72, strokeWidth: 2 },
-              { type: 'line', x1: 80, y1: 62, x2: 85, y2: 72, strokeWidth: 2 },
-              { type: 'line', x1: 90, y1: 60, x2: 95, y2: 70, strokeWidth: 2 },
-            ],
-          },
-        ],
-      },
-    ],
-  },
-
-  // Effect 7: Viking helmet
 
   // Effect 8: Crown
   {
@@ -660,7 +573,178 @@ const HAND_DRAWN_EFFECTS = [
     ],
   },
 
-  // Effect 10: Halo
+  // Effect 6: Bow Tie
+  {
+    id: 'bow-tie',
+    elements: [
+      {
+        type: 'svg',
+        style: {
+          top: '48%',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          width: '100px',
+          height: '60px',
+        },
+        viewBox: '0 0 100 60',
+        paths: [
+          // Left bow side - fill
+          {
+            type: 'path',
+            className: 'hat-fill',
+            d: 'M 20,30 Q 15,20 18,15 Q 22,12 28,15 Q 32,18 35,22 Q 38,26 40,30 Q 38,34 35,38 Q 32,42 28,45 Q 22,48 18,45 Q 15,40 20,30',
+            fill: 'var(--primary-dark)',
+            opacity: 0.5,
+            strokeWidth: 0,
+          },
+          // Left bow side - outline
+          {
+            type: 'path',
+            className: 'hat-outline',
+            d: 'M 20,30 Q 15,20 18,15 Q 22,12 28,15 Q 32,18 35,22 Q 38,26 40,30 Q 38,34 35,38 Q 32,42 28,45 Q 22,48 18,45 Q 15,40 20,30',
+            strokeWidth: 3,
+            delay: '0s',
+          },
+          // Left bow fold detail
+          {
+            type: 'path',
+            className: 'hat-outline',
+            d: 'M 25,22 Q 30,28 28,35',
+            strokeWidth: 2,
+            delay: '0.05s',
+          },
+
+          // Right bow side - fill
+          {
+            type: 'path',
+            className: 'hat-fill',
+            d: 'M 80,30 Q 85,20 82,15 Q 78,12 72,15 Q 68,18 65,22 Q 62,26 60,30 Q 62,34 65,38 Q 68,42 72,45 Q 78,48 82,45 Q 85,40 80,30',
+            fill: 'var(--primary-dark)',
+            opacity: 0.5,
+            strokeWidth: 0,
+          },
+          // Right bow side - outline
+          {
+            type: 'path',
+            className: 'hat-outline',
+            d: 'M 80,30 Q 85,20 82,15 Q 78,12 72,15 Q 68,18 65,22 Q 62,26 60,30 Q 62,34 65,38 Q 68,42 72,45 Q 78,48 82,45 Q 85,40 80,30',
+            strokeWidth: 3,
+            delay: '0.1s',
+          },
+          // Right bow fold detail
+          {
+            type: 'path',
+            className: 'hat-outline',
+            d: 'M 75,22 Q 70,28 72,35',
+            strokeWidth: 2,
+            delay: '0.15s',
+          },
+
+          // Center knot - fill
+          {
+            type: 'path',
+            className: 'hat-fill',
+            d: 'M 42,26 Q 44,24 46,24 Q 48,24 50,25 Q 52,26 54,24 Q 56,24 58,26 Q 58,28 58,30 Q 58,32 58,34 Q 56,36 54,36 Q 52,34 50,35 Q 48,36 46,36 Q 44,36 42,34 Q 42,32 42,30 Q 42,28 42,26',
+            fill: 'var(--primary-dark)',
+            opacity: 0.6,
+            strokeWidth: 0,
+          },
+          // Center knot - outline
+          {
+            type: 'path',
+            className: 'hat-outline',
+            d: 'M 42,26 Q 44,24 46,24 Q 48,24 50,25 Q 52,26 54,24 Q 56,24 58,26 Q 58,28 58,30 Q 58,32 58,34 Q 56,36 54,36 Q 52,34 50,35 Q 48,36 46,36 Q 44,36 42,34 Q 42,32 42,30 Q 42,28 42,26',
+            strokeWidth: 3,
+            delay: '0.2s',
+          },
+          // Center knot folds
+          {
+            type: 'path',
+            className: 'hat-outline',
+            d: 'M 46,27 Q 48,29 50,30 Q 52,31 54,33',
+            strokeWidth: 1.5,
+            delay: '0.25s',
+          },
+
+          // Polka dots on left side
+          {
+            type: 'circle',
+            className: 'hat-fill',
+            cx: 25,
+            cy: 25,
+            r: 2,
+            fill: 'var(--secondary-dark)',
+            opacity: 0.6,
+          },
+          {
+            type: 'circle',
+            className: 'hat-fill',
+            cx: 30,
+            cy: 32,
+            r: 1.5,
+            fill: 'var(--secondary-dark)',
+            opacity: 0.6,
+          },
+          {
+            type: 'circle',
+            className: 'hat-fill',
+            cx: 22,
+            cy: 36,
+            r: 2,
+            fill: 'var(--secondary-dark)',
+            opacity: 0.6,
+          },
+
+          // Polka dots on right side
+          {
+            type: 'circle',
+            className: 'hat-fill',
+            cx: 75,
+            cy: 25,
+            r: 2,
+            fill: 'var(--secondary-dark)',
+            opacity: 0.6,
+          },
+          {
+            type: 'circle',
+            className: 'hat-fill',
+            cx: 70,
+            cy: 32,
+            r: 1.5,
+            fill: 'var(--secondary-dark)',
+            opacity: 0.6,
+          },
+          {
+            type: 'circle',
+            className: 'hat-fill',
+            cx: 78,
+            cy: 36,
+            r: 2,
+            fill: 'var(--secondary-dark)',
+            opacity: 0.6,
+          },
+
+          // Left ribbon end
+          {
+            type: 'path',
+            className: 'hat-outline',
+            d: 'M 40,30 Q 38,30 36,31 Q 34,32 32,34',
+            strokeWidth: 2.5,
+            delay: '0.3s',
+          },
+          // Right ribbon end
+          {
+            type: 'path',
+            className: 'hat-outline',
+            d: 'M 60,30 Q 62,30 64,31 Q 66,32 68,34',
+            strokeWidth: 2.5,
+            delay: '0.35s',
+          },
+        ],
+      },
+    ],
+  },
+
 ];
 
 function HandDrawnEffect({ effect }: { effect: typeof HAND_DRAWN_EFFECTS[0] }) {
@@ -669,7 +753,7 @@ function HandDrawnEffect({ effect }: { effect: typeof HAND_DRAWN_EFFECTS[0] }) {
       {effect.elements.map((element, idx) => (
         <svg
           key={`${effect.id}-${idx}`}
-          className="absolute pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 top-hat-svg"
+          className="absolute pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 top-hat-svg md:translate-y-2 md:-translate-x-0.5"
           style={{
             ...element.style,
             overflow: 'visible'
@@ -893,7 +977,7 @@ export default function Site() {
 
           {/* Right: Photo */}
           <div className="flex justify-center md:justify-end order-1 md:order-2">
-            <div className="relative" style={{ padding: '80px 40px 40px' }}>
+            <div className="relative md:pt-0" style={{ padding: '80px 40px 40px' }}>
               {/* Photo */}
               <div
                 className="relative w-80 h-80 lg:w-96 lg:h-96 rounded-2xl overflow-visible shadow-2x group"
