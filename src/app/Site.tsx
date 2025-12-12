@@ -159,8 +159,9 @@ function useScrollAnimation() {
       { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
     );
 
-    if (ref.current) observer.observe(ref.current);
-    return () => { if (ref.current) observer.unobserve(ref.current); };
+    const currentRef = ref.current;
+    if (currentRef) observer.observe(currentRef);
+    return () => { if (currentRef) observer.unobserve(currentRef); };
   }, []);
 
   return { ref, isVisible };
@@ -885,7 +886,7 @@ export default function Site() {
                 marginBottom: 'var(--spacing-xl)'
               }}
             >
-              Hi, I'm <HandDrawnText>Nyan Prakash</HandDrawnText>
+              Hi, I&apos;m <HandDrawnText>Nyan Prakash</HandDrawnText>
             </h1>
             <p
               className="font-medium"
@@ -1166,10 +1167,10 @@ export default function Site() {
                 lineHeight: 'var(--line-height-tight)'
               }}
             >
-              Let's Work Together
+              Let&apos;s Work Together
             </h2>
             <p style={{ fontSize: 'var(--font-size-body)', color: 'var(--gray-600)', lineHeight: 'var(--line-height-relaxed)' }}>
-              Interested in collaborating or want to chat about robotics, AI, or prototyping? I'm always open to new opportunities.
+              Interested in collaborating or want to chat about robotics, AI, or prototyping? I&apos;m always open to new opportunities.
             </p>
             <div className="flex flex-wrap gap-3 justify-center">
               <Link
