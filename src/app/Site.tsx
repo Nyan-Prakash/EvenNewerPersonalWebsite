@@ -580,7 +580,7 @@ const HAND_DRAWN_EFFECTS = [
       {
         type: 'svg',
         style: {
-          top: '48%',
+          top: '60%',
           left: '50%',
           transform: 'translateX(-50%)',
           width: '100px',
