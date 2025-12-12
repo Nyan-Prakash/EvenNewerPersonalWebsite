@@ -763,7 +763,7 @@ function HandDrawnEffect({ effect }: { effect: typeof HAND_DRAWN_EFFECTS[0] }) {
           xmlns="http://www.w3.org/2000/svg"
         >
           {element.paths.map((path, pathIdx) => {
-            if (path.type === 'group') {
+            if (path.type === 'group' && 'children' in path) {
               return (
                 <g key={pathIdx} className={path.className}>
                   {path.children?.map((child, childIdx) => (
