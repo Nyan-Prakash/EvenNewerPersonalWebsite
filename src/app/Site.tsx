@@ -762,11 +762,11 @@ function HandDrawnEffect({ effect }: { effect: typeof HAND_DRAWN_EFFECTS[0] }) {
           viewBox={element.viewBox}
           xmlns="http://www.w3.org/2000/svg"
         >
-          {element.paths.map((path, pathIdx) => {
-            if (path.type === 'group' && 'children' in path) {
+          {element.paths.map((path: any, pathIdx: number) => {
+            if (path.type === 'group') {
               return (
                 <g key={pathIdx} className={path.className}>
-                  {path.children?.map((child, childIdx) => (
+                  {path.children?.map((child: any, childIdx: number) => (
                     <line
                       key={childIdx}
                       x1={child.x1}
