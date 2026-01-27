@@ -8,7 +8,11 @@ interface MouseTrail {
   timestamp: number;
 }
 
-export default function InteractiveBackground() {
+interface InteractiveBackgroundProps {
+  lighter?: boolean;
+}
+
+export default function InteractiveBackground({ lighter = false }: InteractiveBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouseRef = useRef({ x: 0, y: 0 });
   const animationFrameRef = useRef<number | null>(null);
@@ -45,9 +49,11 @@ export default function InteractiveBackground() {
     updateCanvasSize();
     window.addEventListener('resize', updateCanvasSize);
 
-    // Get theme colors
+    // Get theme colors with lighter option for blog
     const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const dotColor = isDarkMode ? 'rgba(139, 169, 109, 0.2)' : 'rgba(124, 179, 66, 0.15)';
+    const dotColor = lighter
+      ? (isDarkMode ? 'rgba(139, 169, 109, 0.05)' : 'rgba(124, 179, 66, 0.03)')
+      : (isDarkMode ? 'rgba(139, 169, 109, 0.2)' : 'rgba(124, 179, 66, 0.15)');
 
     // Mouse move handler with trail tracking
     const handleMouseMove = (e: MouseEvent) => {
@@ -114,14 +120,16 @@ export default function InteractiveBackground() {
           // Closest dots get biggest
           const scale = 3 - (distanceToMouse / 60) * 1.5;
           size = dotRadius * scale;
-          const opacity = 0.4;
+          const baseOpacity = lighter ? 0.1 : 0.4;
+          const opacity = baseOpacity;
           ctx.fillStyle = isDarkMode
             ? `rgba(168, 201, 131, ${opacity})`
             : `rgba(124, 179, 66, ${opacity})`;
         } else if (maxTrailInfluence > 0.1) {
           // Trail dots get medium highlight
           size = dotRadius * (1 + maxTrailInfluence * 1.5);
-          const opacity = 0.15 + maxTrailInfluence * 0.2;
+          const baseOpacity = lighter ? 0.05 : 0.15;
+          const opacity = baseOpacity + maxTrailInfluence * (lighter ? 0.08 : 0.2);
           ctx.fillStyle = isDarkMode
             ? `rgba(168, 201, 131, ${opacity})`
             : `rgba(124, 179, 66, ${opacity})`;
@@ -147,7 +155,7 @@ export default function InteractiveBackground() {
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, []);
+  }, [lighter]);
 
   return (
     <canvas

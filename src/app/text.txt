@@ -20,4 +20,4 @@ const handleAnimationComplete = () => {
 />
 
 
-https://calendly.com/nyanjprakash/30min
+https://calendly.com/nyanjprakash/a-meeting

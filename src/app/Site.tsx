@@ -21,7 +21,7 @@ const DATA = {
   cta: {
     resumeHref: "/resume.pdf",
     email: "mailto:nyanjprakash@gmail.com",
-    calendarly: "https://calendly.com/nyanjprakash/30min",
+    calendarly: "https://calendly.com/nyanjprakash/a-meeting",
     phone: "tel:315-882-6569",
   },
   socials: [
@@ -198,14 +198,23 @@ function Tag({ children }: { children: React.ReactNode }) {
     { bg: '#fff3e0', text: '#e65100' },
   ];
 
-  const randomColor = colors[Math.floor(Math.random() * colors.length)];
+  // Use a deterministic hash of the children to select color
+  // This ensures server and client render the same color
+  const childText = typeof children === 'string' ? children : String(children);
+  let hash = 0;
+  for (let i = 0; i < childText.length; i++) {
+    hash = ((hash << 5) - hash) + childText.charCodeAt(i);
+    hash = hash & hash; // Convert to 32-bit integer
+  }
+  const colorIndex = Math.abs(hash) % colors.length;
+  const selectedColor = colors[colorIndex];
 
   return (
     <span
       className="inline-block rounded-full px-3 py-1 transition-all hover:scale-110 hover:rotate-2"
       style={{
-        backgroundColor: randomColor.bg,
-        color: randomColor.text,
+        backgroundColor: selectedColor.bg,
+        color: selectedColor.text,
         fontSize: 'var(--font-size-tiny)',
         fontWeight: 600,
         transitionDuration: 'var(--transition-bounce)'

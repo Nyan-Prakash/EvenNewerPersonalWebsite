@@ -1,4 +1,5 @@
 import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -20,8 +21,9 @@ export function generateStaticParams() {
   return getAllPosts().map((post) => ({ slug: post.slug }));
 }
 
-export function generateMetadata({ params }: { params: Params }): Metadata {
-  const post = getPostBySlug(params.slug);
+export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
   if (!post) {
     return {
       title: "Blog post",
@@ -44,8 +46,9 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
   };
 }
 
-export default function BlogPostPage({ params }: { params: Params }) {
-  const post = getPostBySlug(params.slug);
+export default async function BlogPostPage({ params }: { params: Promise<Params> }) {
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
 
   if (!post) {
     notFound();
@@ -101,6 +104,7 @@ export default function BlogPostPage({ params }: { params: Params }) {
 
       <ReactMarkdown
         className="mt-12 space-y-7 text-base leading-7 text-neutral-700 dark:text-neutral-200"
+        rehypePlugins={[rehypeRaw]}
         components={{
           h2: (props) => (
             <h2
@@ -143,6 +147,41 @@ export default function BlogPostPage({ params }: { params: Params }) {
               className="font-semibold text-neutral-900 dark:text-neutral-100"
               {...props}
             />
+          ),
+          code: ({ inline, className, children, ...props }: any) => {
+            if (inline) {
+              return (
+                <code
+                  className="rounded bg-neutral-800 px-1.5 py-0.5 font-mono text-sm text-neutral-100"
+                  {...props}
+                >
+                  {children}
+                </code>
+              );
+            }
+            return (
+              <code
+                className={`font-mono text-sm text-neutral-100 ${className || ""}`}
+                {...props}
+              >
+                {children}
+              </code>
+            );
+          },
+          pre: (props) => (
+            <pre
+              className="overflow-x-auto rounded-2xl border border-neutral-700 bg-neutral-900 p-6 shadow-lg dark:border-neutral-800 dark:bg-neutral-950"
+              {...props}
+            />
+          ),
+          iframe: (props: React.IframeHTMLAttributes<HTMLIFrameElement>) => (
+            <div className="my-8 overflow-hidden rounded-2xl border border-neutral-200/60 shadow-lg dark:border-neutral-800">
+              <iframe
+                {...props}
+                className="w-full aspect-video"
+                allowFullScreen
+              />
+            </div>
           ),
         }}
       >
